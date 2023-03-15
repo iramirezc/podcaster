@@ -25,7 +25,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "lint:format": "prettier --check .",
+    "lint:format:fix": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
