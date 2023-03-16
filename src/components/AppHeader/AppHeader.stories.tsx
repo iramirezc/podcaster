@@ -5,6 +5,10 @@ import { AppHeader } from './AppHeader';
 export default {
   title: 'Components/AppHeader',
   component: AppHeader,
+  decorators: [(Story) => <div style={{ height: '150vh' }}>{Story()}</div>],
+  parameters: {
+    layout: 'fullscreen',
+  },
 } as ComponentMeta<typeof AppHeader>;
 
 const AppHeaderTemplate: ComponentStory<typeof AppHeader> = (props) => (
