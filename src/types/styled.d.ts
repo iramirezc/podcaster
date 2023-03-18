@@ -5,7 +5,10 @@ declare module 'styled-components' {
     palette: {
       primary: string;
       background: string;
-      text: string;
+      text: {
+        primary: string;
+        secondary: string;
+      };
       shadow: string;
     };
     typography: {
