@@ -1,60 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import { AppHeader } from 'components';
-import { Counter } from 'features/counter/Counter';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { client } from 'api/client';
+import { HomePage } from 'pages';
+import { adaptPodcastFromResponse } from 'features/podcasts';
 
 function App() {
-  return (
-    <div className="App">
-      <AppHeader />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+  const [podcasts, setPodcasts] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const podcastsData = await (await client.fetchPosts()).data;
+        setPodcasts(podcastsData.map(adaptPodcastFromResponse));
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
+
+  return <HomePage podcasts={podcasts} />;
 }
 
 export default App;
