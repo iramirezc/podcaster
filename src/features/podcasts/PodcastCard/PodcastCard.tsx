@@ -22,6 +22,6 @@ export const PodcastCard: FC<PodcastCardProps> = ({
   <PodcastContainer id={`podcast-${podcastId}`}>
     <PodcastCover src={coverUrl} />
     <PodcastTitle>{title}</PodcastTitle>
-    <PodcastAuthor>{author}</PodcastAuthor>
+    <PodcastAuthor>Author:&nbsp;{author}</PodcastAuthor>
   </PodcastContainer>
 );
