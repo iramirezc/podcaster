@@ -12,6 +12,7 @@ export const PodcastContainer = styled.article`
 
 export const PodcastCover = styled.img`
   border-radius: 50%;
+  border: 1px solid rgb(128 128 128 / 25%);
   height: ${COVER_HEIGHT}px;
   margin-bottom: 8px;
   margin-top: calc(${COVER_HEIGHT}px / 2 * -1);
