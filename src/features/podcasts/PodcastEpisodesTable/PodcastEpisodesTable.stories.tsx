@@ -16,19 +16,22 @@ Default.args = {
   children: (
     <>
       <PodcastEpisodesTable.Row
+        date="19/03/2023"
+        duration="15:45"
+        episodeId="1"
         title="Podcast 1"
-        date="19/03/2023"
-        duration="15:45"
       />
       <PodcastEpisodesTable.Row
+        date="19/03/2023"
+        duration="15:45"
+        episodeId="2"
         title="Podcast 2"
-        date="19/03/2023"
-        duration="15:45"
       />
       <PodcastEpisodesTable.Row
-        title="Podcast 3"
         date="19/03/2023"
         duration="15:45"
+        episodeId="3"
+        title="Podcast 3"
       />
     </>
   ),

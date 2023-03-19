@@ -26,13 +26,15 @@ export const PodcastEpisodesTable = ({
 PodcastEpisodesTable.Row = ({
   date,
   duration,
+  episodeId,
   title,
 }: {
   date: string;
   duration: string;
+  episodeId: string;
   title: string;
 }) => (
-  <TableRow>
+  <TableRow id={`episode-${episodeId}`}>
     <TableCell>{title}</TableCell>
     <TableCell align="center">{date}</TableCell>
     <TableCell align="center">{duration}</TableCell>
