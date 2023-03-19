@@ -4,6 +4,7 @@ import {
   createAsyncThunk,
 } from '@reduxjs/toolkit';
 import { client } from 'api/client';
+import { setStoredPodcasts } from 'app/storage';
 import { adaptPodcastFromResponse } from './podcasts-utils';
 
 export interface Podcast {
@@ -46,6 +47,7 @@ export const podcastsSlice = createSlice({
       state.status = 'success';
       state.lastFetch = Date.now();
       podcastsAdapter.addMany(state, action.payload);
+      setStoredPodcasts(state);
     });
     builder.addCase(fetchPodcasts.rejected, (state) => {
       state.status = 'error';

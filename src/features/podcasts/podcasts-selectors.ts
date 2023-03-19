@@ -9,3 +9,5 @@ export const { selectAll: selectAllPosts } = selectors;
 
 export const selectLastFetch = (state: RootState) =>
   selectPodcasts(state).lastFetch;
+
+export const selectStatus = (state: RootState) => selectPodcasts(state).status;

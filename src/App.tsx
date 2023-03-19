@@ -5,6 +5,7 @@ import {
   fetchPodcasts,
   selectAllPosts,
   selectLastFetch,
+  selectStatus,
 } from 'features/podcasts';
 import { HomePage } from 'pages';
 import { isWithin24Hours } from 'utils';
@@ -12,13 +13,17 @@ import { isWithin24Hours } from 'utils';
 function App() {
   const podcasts = useAppSelector(selectAllPosts);
   const lastFetch = useAppSelector(selectLastFetch);
+  const podcastsStatus = useAppSelector(selectStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!lastFetch || !isWithin24Hours(lastFetch)) {
-      dispatch(fetchPodcasts());
+    if (podcastsStatus !== 'loading') {
+      if (!lastFetch || !isWithin24Hours(lastFetch)) {
+        dispatch(fetchPodcasts());
+      }
     }
-  }, [lastFetch, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
