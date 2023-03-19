@@ -28,8 +28,11 @@ export const renderWithProviders = (
     </StoreProvider>
   );
 
-  return render(component, {
-    wrapper: Wrapper,
-    ...renderOptions,
-  });
+  return {
+    store,
+    ...render(component, {
+      wrapper: Wrapper,
+      ...renderOptions,
+    }),
+  };
 };
