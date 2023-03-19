@@ -15,4 +15,6 @@ export const Default = HomePageTemplate.bind({});
 
 Default.args = {
   podcasts: PodcastGridStories.Default.args?.podcasts,
+  filterResults: 100,
+  filterValue: 'Art',
 };

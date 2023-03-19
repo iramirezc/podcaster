@@ -21,7 +21,7 @@ export const podcastsAdapter = createEntityAdapter<Podcast>({
 export const fetchPodcasts = createAsyncThunk(
   'podcasts/fetchPodcasts',
   async () => {
-    const response = await client.fetchPosts();
+    const response = await client.fetchPodcasts();
 
     return response.data.map(adaptPodcastFromResponse) as ReturnType<
       typeof adaptPodcastFromResponse
@@ -32,13 +32,19 @@ export const fetchPodcasts = createAsyncThunk(
 export const podcastsSlice = createSlice({
   name: 'podcasts',
   initialState: podcastsAdapter.getInitialState<{
+    filter: '';
     lastFetch: number | null;
     status: 'idle' | 'loading' | 'success' | 'error';
   }>({
+    filter: '',
     lastFetch: null,
     status: 'idle',
   }),
-  reducers: {},
+  reducers: {
+    updateFilter(state, action) {
+      state.filter = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(fetchPodcasts.pending, (state) => {
       state.status = 'loading';
@@ -55,6 +61,8 @@ export const podcastsSlice = createSlice({
   },
 });
 
-const { reducer } = podcastsSlice;
+const { reducer, actions } = podcastsSlice;
+
+export const { updateFilter } = actions;
 
 export default reducer;

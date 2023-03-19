@@ -5,6 +5,7 @@ type PodcastState = ReturnType<typeof podcastReducer>;
 export const getStoredPodcasts = () => {
   const podcastsInitialState = {
     entities: {},
+    filter: '',
     ids: [],
     lastFetch: null,
     status: 'idle',
