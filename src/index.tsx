@@ -1,9 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-
-import { ThemeProvider } from 'app/providers';
-import { store } from 'app/store';
+import { ThemeProvider, StoreProvider } from 'app/providers';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -14,11 +11,11 @@ async function start() {
 
   root.render(
     <React.StrictMode>
-      <Provider store={store}>
+      <StoreProvider>
         <ThemeProvider>
           <App />
         </ThemeProvider>
-      </Provider>
+      </StoreProvider>
     </React.StrictMode>
   );
 }
