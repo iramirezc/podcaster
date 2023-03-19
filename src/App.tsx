@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { AppHeader } from 'components';
 import {
@@ -8,6 +7,7 @@ import {
   selectLastFetch,
 } from 'features/podcasts';
 import { HomePage } from 'pages';
+import { isWithin24Hours } from 'utils';
 
 function App() {
   const podcasts = useAppSelector(selectAllPosts);
@@ -15,7 +15,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!lastFetch) {
+    if (!lastFetch || !isWithin24Hours(lastFetch)) {
       dispatch(fetchPodcasts());
     }
   }, [lastFetch, dispatch]);
