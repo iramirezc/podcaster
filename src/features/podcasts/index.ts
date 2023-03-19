@@ -1,3 +1,4 @@
+export * from './PodcastFilter/PodcastFilter';
 export * from './PodcastGrid/PodcastGrid';
 export * from './podcasts-utils';
 export * from './podcasts-selectors';

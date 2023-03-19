@@ -37,7 +37,7 @@ export const client = (() => {
   };
 
   return {
-    fetchPosts: async function () {
+    fetchPodcasts: async function () {
       const response = await get(
         `${baseUrl}/us/rss/toppodcasts/limit=100/genre=1310/json`
       );

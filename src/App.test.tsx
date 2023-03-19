@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import { renderWithProviders, screen } from 'test/test-utils';
 import { client } from 'api/client';
 import { T24Hours } from 'utils';
@@ -5,7 +6,7 @@ import App from './App';
 
 describe('<App/>', () => {
   beforeEach(() => {
-    jest.spyOn(client, 'fetchPosts');
+    jest.spyOn(client, 'fetchPodcasts');
     jest.useFakeTimers();
   });
 
@@ -16,18 +17,9 @@ describe('<App/>', () => {
   });
 
   test('fetches and renders the podcasts when loading the first time', async () => {
-    renderWithProviders(<App />, {
-      preloadedState: {
-        podcasts: {
-          entities: {},
-          ids: [],
-          lastFetch: null,
-          status: 'idle',
-        },
-      },
-    });
+    renderWithProviders(<App />);
 
-    expect(client.fetchPosts).toHaveBeenCalledTimes(1);
+    expect(client.fetchPodcasts).toHaveBeenCalledTimes(1);
     expect(await screen.findAllByRole('article')).toHaveLength(3);
   });
 
@@ -36,6 +28,7 @@ describe('<App/>', () => {
       preloadedState: {
         podcasts: {
           entities: {},
+          filter: '',
           ids: [],
           lastFetch: Date.now() + T24Hours,
           status: 'idle',
@@ -43,7 +36,7 @@ describe('<App/>', () => {
       },
     });
 
-    expect(client.fetchPosts).not.toHaveBeenCalled();
+    expect(client.fetchPodcasts).not.toHaveBeenCalled();
   });
 
   test('fetches the podcasts if lastFetch is past 24 hours', async () => {
@@ -51,6 +44,7 @@ describe('<App/>', () => {
       preloadedState: {
         podcasts: {
           entities: {},
+          filter: '',
           ids: [],
           lastFetch: Date.now() + T24Hours + 1,
           status: 'idle',
@@ -58,7 +52,23 @@ describe('<App/>', () => {
       },
     });
 
-    expect(client.fetchPosts).toHaveBeenCalledTimes(1);
+    expect(client.fetchPodcasts).toHaveBeenCalledTimes(1);
+    expect(await screen.findAllByRole('article')).toHaveLength(3);
+  });
+
+  test('podcast filter', async () => {
+    const { store } = renderWithProviders(<App />);
+
+    expect(await screen.findAllByRole('article')).toHaveLength(3);
+
+    const podcastId = store.getState().podcasts.ids[1] as string;
+
+    await userEvent.type(screen.getByRole('textbox'), podcastId);
+
+    expect(await screen.findAllByRole('article')).toHaveLength(1);
+
+    await userEvent.clear(screen.getByRole('textbox'));
+
     expect(await screen.findAllByRole('article')).toHaveLength(3);
   });
 });
