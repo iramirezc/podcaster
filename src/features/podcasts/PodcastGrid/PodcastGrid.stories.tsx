@@ -1,4 +1,3 @@
-import React from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { PodcastGrid } from './PodcastGrid';
