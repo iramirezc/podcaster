@@ -1,22 +1,21 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider, StoreProvider } from 'app/providers';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { getStoredPodcasts } from 'app/storage';
 
 async function start() {
   const container = document.getElementById('root')!;
   const root = createRoot(container);
+  const storedPodcasts = getStoredPodcasts();
 
   root.render(
-    <React.StrictMode>
-      <StoreProvider>
-        <ThemeProvider>
-          <App />
-        </ThemeProvider>
-      </StoreProvider>
-    </React.StrictMode>
+    <StoreProvider preloadedState={{ podcasts: storedPodcasts }}>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </StoreProvider>
   );
 }
 

@@ -12,6 +12,7 @@ describe('<App/>', () => {
   afterEach(() => {
     jest.runOnlyPendingTimers();
     jest.useRealTimers();
+    jest.restoreAllMocks();
   });
 
   test('fetches and renders the podcasts when loading the first time', async () => {
@@ -45,7 +46,7 @@ describe('<App/>', () => {
     expect(client.fetchPosts).not.toHaveBeenCalled();
   });
 
-  test('fetches the podcasts if lastFetch is past 24 hours', () => {
+  test('fetches the podcasts if lastFetch is past 24 hours', async () => {
     renderWithProviders(<App />, {
       preloadedState: {
         podcasts: {
@@ -58,5 +59,6 @@ describe('<App/>', () => {
     });
 
     expect(client.fetchPosts).toHaveBeenCalledTimes(1);
+    expect(await screen.findAllByRole('article')).toHaveLength(3);
   });
 });
