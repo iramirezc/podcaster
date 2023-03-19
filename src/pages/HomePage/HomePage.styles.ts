@@ -9,4 +9,6 @@ export const PageContainer = styled.main`
 
 export const StyledFilter = styled(PodcastFilter)`
   align-self: flex-end;
+  margin-top: 1rem;
+  margin-right: 1rem;
 `;
