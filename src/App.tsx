@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { client } from 'api/client';
+import React, { useEffect } from 'react';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import {
+  fetchPodcasts,
+  selectAllPosts,
+  selectLastFetch,
+} from 'features/podcasts';
 import { HomePage } from 'pages';
-import { adaptPodcastFromResponse } from 'features/podcasts';
 
 function App() {
-  const [podcasts, setPodcasts] = useState([]);
+  const podcasts = useAppSelector(selectAllPosts);
+  const lastFetch = useAppSelector(selectLastFetch);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    (async () => {
-      try {
-        const podcastsData = await (await client.fetchPosts()).data;
-        setPodcasts(podcastsData.map(adaptPodcastFromResponse));
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, []);
+    if (!lastFetch) {
+      dispatch(fetchPodcasts());
+    }
+  }, [lastFetch, dispatch]);
 
   return <HomePage podcasts={podcasts} />;
 }
