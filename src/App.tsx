@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { AppHeader } from 'components';
 import {
   fetchPodcasts,
   selectAllPosts,
@@ -19,7 +20,12 @@ function App() {
     }
   }, [lastFetch, dispatch]);
 
-  return <HomePage podcasts={podcasts} />;
+  return (
+    <>
+      <AppHeader />
+      <HomePage podcasts={podcasts} />
+    </>
+  );
 }
 
 export default App;
