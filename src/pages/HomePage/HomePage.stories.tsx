@@ -1,4 +1,3 @@
-import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import * as PodcastGridStories from '../../features/podcasts/PodcastGrid/PodcastGrid.stories';
 import { HomePage } from './HomePage';

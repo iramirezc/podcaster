@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { PodcastCard } from '../PodcastCard/PodcastCard';
 import { GridContainer } from './PodcastGrid.styles';
 
