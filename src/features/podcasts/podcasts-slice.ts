@@ -21,7 +21,10 @@ export const fetchPodcasts = createAsyncThunk(
   'podcasts/fetchPodcasts',
   async () => {
     const response = await client.fetchPosts();
-    return response.data;
+
+    return response.data.map(adaptPodcastFromResponse) as ReturnType<
+      typeof adaptPodcastFromResponse
+    >[];
   }
 );
 
@@ -42,10 +45,7 @@ export const podcastsSlice = createSlice({
     builder.addCase(fetchPodcasts.fulfilled, (state, action) => {
       state.status = 'success';
       state.lastFetch = Date.now();
-      podcastsAdapter.addMany(
-        state,
-        action.payload.map(adaptPodcastFromResponse)
-      );
+      podcastsAdapter.addMany(state, action.payload);
     });
     builder.addCase(fetchPodcasts.rejected, (state) => {
       state.status = 'error';
