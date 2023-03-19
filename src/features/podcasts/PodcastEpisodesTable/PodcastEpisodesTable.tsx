@@ -7,9 +7,12 @@ import {
   TableRowGroup,
 } from './PodcastEpisodesTable.styles';
 
-export const PodcastEpisodesTable = ({ children }: PropsWithChildren) => {
+export const PodcastEpisodesTable = ({
+  className,
+  children,
+}: PropsWithChildren<{ className?: string }>) => {
   return (
-    <Table>
+    <Table className={className}>
       <TableRow>
         <TableColumnHeader>Title</TableColumnHeader>
         <TableColumnHeader align="center">Date</TableColumnHeader>

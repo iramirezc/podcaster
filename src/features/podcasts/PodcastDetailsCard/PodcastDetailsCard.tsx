@@ -12,6 +12,7 @@ import {
 
 interface PodcastDetailsCardProps {
   author: string;
+  className?: string;
   coverUrl: string;
   description: string;
   title: string;
@@ -19,12 +20,13 @@ interface PodcastDetailsCardProps {
 
 export const PodcastDetailsCard: FC<PodcastDetailsCardProps> = ({
   author,
+  className,
   coverUrl,
   description,
   title,
 }) => {
   return (
-    <MainContainer>
+    <MainContainer className={className}>
       <CoverContainer>
         <PodcastCover src={coverUrl} />
       </CoverContainer>
