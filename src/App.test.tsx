@@ -1,15 +1,11 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { store } from 'app/store';
-import { renderWithTheme, screen } from 'test/test-utils';
+import { renderWithProviders, screen } from 'test/test-utils';
 import App from './App';
 
-test.skip('renders learn react link', () => {
-  renderWithTheme(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+describe('<App/>', () => {
+  test('fetches the podcasts', async () => {
+    renderWithProviders(<App />);
 
-  expect(screen.getByText(/learn/i)).toBeInTheDocument();
+    expect(await screen.findAllByRole('article')).toHaveLength(3);
+  });
 });
