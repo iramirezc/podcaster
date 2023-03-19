@@ -1,22 +1,23 @@
 import styled from 'styled-components';
 
 export const MainContainer = styled.aside`
+  border-radius: 0.3rem;
   box-shadow: ${({ theme }) => theme.palette.shadow};
+  color: ${({ theme }) => theme.palette.text.primary};
   display: flex;
   flex-direction: column;
   padding: 0 0.8rem;
-  color: ${({ theme }) => theme.palette.text.primary};
 `;
 
 export const CoverContainer = styled.div`
-  padding: 1.5rem 2rem;
   display: flex;
   justify-content: center;
+  padding: 1.5rem 2rem;
 `;
 
 export const TitleContainer = styled.div`
-  border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
+  border-top: 1px solid lightgray;
   padding: 1.5rem 1rem;
 `;
 
