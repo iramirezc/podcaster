@@ -8,10 +8,11 @@ import { setStoredPodcasts } from 'app/storage';
 import { adaptPodcastFromResponse } from './podcasts-utils';
 
 export interface Podcast {
-  podcastId: string;
-  coverUrl: string;
-  title: string;
   author: string;
+  coverUrl: string;
+  description: string;
+  podcastId: string;
+  title: string;
 }
 
 export const podcastsAdapter = createEntityAdapter<Podcast>({
