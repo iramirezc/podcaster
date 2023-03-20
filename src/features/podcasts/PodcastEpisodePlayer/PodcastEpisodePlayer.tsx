@@ -20,7 +20,7 @@ export const PodcastEpisodePlayer: FC<PodcastEpisodePlayerProps> = ({
   return (
     <PlayerContainer>
       <EpisodeTitle>{title}</EpisodeTitle>
-      <EpisodeDescription>{description}</EpisodeDescription>
+      <EpisodeDescription dangerouslySetInnerHTML={{ __html: description }} />
       <AudioPlayer controls src={audioUrl} />
     </PlayerContainer>
   );
