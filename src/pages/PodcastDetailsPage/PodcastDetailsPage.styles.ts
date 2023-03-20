@@ -22,9 +22,8 @@ export const RightSection = styled.section`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  width: 66%;
   justify-self: flex-end;
-  margin-left: 10%;
+  margin-left: 5%;
 `;
 
 export const StyledPodcastDetails = styled(PodcastDetailsCard)``;

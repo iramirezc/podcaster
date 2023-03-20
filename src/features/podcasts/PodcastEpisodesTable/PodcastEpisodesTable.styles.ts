@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Table = styled.div.attrs({ role: 'grid' })`
   border-radius: 0.3rem;
@@ -22,12 +22,22 @@ export const TableRowGroup = styled.div.attrs({ role: 'rowgroup' })`
 export const TableRow = styled.div.attrs({ role: 'row' })`
   border-bottom: 1px solid lightgray;
   display: grid;
-  grid-template-columns: 70% 1fr 1fr;
+  grid-template-columns: 60% 1fr 1fr;
   padding: 0.8rem 1rem;
+  column-gap: 0.8rem;
 `;
 
 export const TableCell = styled.div.attrs({ role: 'gridcell' })<{
   align?: string;
+  noWrap?: boolean;
 }>`
   text-align: ${({ align = 'left' }) => align};
+
+  ${({ noWrap }) =>
+    noWrap &&
+    css`
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    `}
 `;

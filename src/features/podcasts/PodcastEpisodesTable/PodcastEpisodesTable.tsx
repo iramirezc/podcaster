@@ -35,7 +35,7 @@ PodcastEpisodesTable.Row = ({
   title: string;
 }) => (
   <TableRow id={`episode-${episodeId}`}>
-    <TableCell>{title}</TableCell>
+    <TableCell noWrap>{title}</TableCell>
     <TableCell align="center">{date}</TableCell>
     <TableCell align="center">{duration}</TableCell>
   </TableRow>
