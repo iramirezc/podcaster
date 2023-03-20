@@ -7,7 +7,8 @@ const selectPodcasts = (state: RootState) => state.podcasts;
 
 const selectors = podcastsAdapter.getSelectors(selectPodcasts);
 
-export const { selectAll: selectAllPodcasts } = selectors;
+export const { selectAll: selectAllPodcasts, selectById: selectPodcastById } =
+  selectors;
 
 export const selectLastFetch = (state: RootState) =>
   selectPodcasts(state).lastFetch;

@@ -2,10 +2,18 @@ import {
   createSlice,
   createEntityAdapter,
   createAsyncThunk,
+  PayloadAction,
 } from '@reduxjs/toolkit';
 import { client } from 'api/client';
 import { setStoredPodcasts } from 'app/storage';
 import { adaptPodcastFromResponse } from './podcasts-utils';
+
+export interface PodcastEpisode {
+  date: string;
+  duration: string;
+  episodeId: string;
+  title: string;
+}
 
 export interface Podcast {
   author: string;
@@ -13,6 +21,7 @@ export interface Podcast {
   description: string;
   podcastId: string;
   title: string;
+  episodes: PodcastEpisode[];
 }
 
 export const podcastsAdapter = createEntityAdapter<Podcast>({
@@ -45,6 +54,20 @@ export const podcastsSlice = createSlice({
     updateFilter(state, action) {
       state.filter = action.payload;
     },
+    savePodcastEpisodes(
+      state,
+      action: PayloadAction<{ podcastId: string; episodes: PodcastEpisode[] }>
+    ) {
+      const { podcastId, episodes } = action.payload;
+
+      const podcast = state.entities[podcastId];
+
+      if (podcast) {
+        podcast.episodes = episodes;
+      }
+
+      setStoredPodcasts(state);
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchPodcasts.pending, (state) => {
@@ -64,6 +87,6 @@ export const podcastsSlice = createSlice({
 
 const { reducer, actions } = podcastsSlice;
 
-export const { updateFilter } = actions;
+export const { updateFilter, savePodcastEpisodes } = actions;
 
 export default reducer;

@@ -56,7 +56,11 @@ export const client = (() => {
       };
     },
     fetchPodcastDetails: async function (podcastId: string) {
-      const response = await get(`${baseUrl}/lookup?id=${podcastId}`);
+      // URL borrowed from:
+      // https://stackoverflow.com/questions/72841863/how-do-i-get-all-the-episodes-for-an-itunes-api-podcast
+      const response = await get(
+        `${baseUrl}/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode`
+      );
 
       let data;
 
@@ -68,7 +72,7 @@ export const client = (() => {
 
       return {
         status: response.status,
-        data: data.resultCount > 0 ? data.results[0] : null,
+        data: data?.results,
       };
     },
   };

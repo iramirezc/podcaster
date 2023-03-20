@@ -1,70 +1,64 @@
 import { useEffect, useState } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { client } from 'api/client';
-import { adaptPodcastDetailsFromResponse } from 'features/podcasts';
+import {
+  adaptPodcastEpisodesFromResponse,
+  selectPodcastById,
+  savePodcastEpisodes,
+} from 'features/podcasts';
 import { PodcastDetailsPage } from 'pages';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 type RequestStatus = 'idle' | 'loading' | 'success' | 'error';
 
-type PodcastDetails = {
-  author: string;
-  coverUrl: string;
-  description: string;
-  episodes: {
-    date: string;
-    duration: string;
-    episodeId: string;
-    title: string;
-  }[];
-  podcastId: string;
-  title: string;
-};
-
 export const PodcastDetailsPageRoute = () => {
-  const [status, setStatus] = useState<RequestStatus>('idle');
-  const [podcastDetails, setPodcastDetails] = useState<PodcastDetails>();
   const { podcastId } = useParams<{ podcastId: string }>();
+  const podcast = useAppSelector((state) =>
+    selectPodcastById(state, String(podcastId))
+  );
+  const [status, setStatus] = useState<RequestStatus>('idle');
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     (async () => {
-      if (podcastId && status === 'idle') {
+      if (podcast && podcast.episodes.length === 0 && status === 'idle') {
         setStatus('loading');
 
         try {
-          const response = await client.fetchPodcastDetails(podcastId);
-
-          if (response.data) {
-            setPodcastDetails(adaptPodcastDetailsFromResponse(response.data));
-          }
+          const response = await client.fetchPodcastDetails(podcast.podcastId);
 
           setStatus('success');
+
+          const episodes = adaptPodcastEpisodesFromResponse(response.data);
+
+          dispatch(
+            savePodcastEpisodes({ podcastId: podcast.podcastId, episodes })
+          );
         } catch (err) {
           console.error(err);
           setStatus('error');
         }
       }
     })();
-  }, [podcastId, status]);
+  }, [podcast, status, dispatch]);
 
-  if (!podcastId) {
-    return <Navigate to={'/'} />;
+  if (!podcast) {
+    return (
+      <p>
+        Podcast '{podcastId}' not found. Return to <Link to="/">home</Link>
+      </p>
+    );
   }
 
-  if (status === 'loading') {
-    return <h2>Loading...</h2>;
-  }
-
-  return podcastDetails ? (
+  return (
     <PodcastDetailsPage
-      author={podcastDetails.author}
-      coverUrl={podcastDetails.coverUrl}
-      description={podcastDetails.description}
-      episodes={podcastDetails.episodes}
-      podcastId={podcastDetails.podcastId}
-      title={podcastDetails.title}
+      author={podcast.author}
+      coverUrl={podcast.coverUrl}
+      description={podcast.description}
+      episodes={podcast.episodes}
+      podcastId={podcast.podcastId}
+      title={podcast.title}
     />
-  ) : (
-    <h2>Podcast '{podcastId}' not found.</h2>
   );
 };
