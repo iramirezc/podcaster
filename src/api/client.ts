@@ -55,5 +55,25 @@ export const client = (() => {
         data: data.feed.entry,
       };
     },
+    fetchPodcastDetails: async function (podcastId: string) {
+      // URL borrowed from:
+      // https://stackoverflow.com/questions/72841863/how-do-i-get-all-the-episodes-for-an-itunes-api-podcast
+      const response = await get(
+        `${baseUrl}/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode`
+      );
+
+      let data;
+
+      try {
+        data = JSON.parse(response.data.contents);
+      } catch (err) {
+        return Promise.reject(new Error("Couldn't parse response data."));
+      }
+
+      return {
+        status: response.status,
+        data: data?.results,
+      };
+    },
   };
 })();
