@@ -1,8 +1,9 @@
 export const adaptPodcastFromResponse = (podcastData: any) => ({
-  author: podcastData['im:artist'].label,
-  coverUrl: podcastData['im:image'][2].label,
-  podcastId: podcastData.id.attributes['im:id'],
-  title: podcastData.title.label,
+  author: podcastData['im:artist'].label as string,
+  coverUrl: podcastData['im:image'][2].label as string,
+  description: podcastData.summary.label as string,
+  podcastId: podcastData.id.attributes['im:id'] as string,
+  title: podcastData['im:name'].label as string,
 });
 
 export const contains = (target: string, value: string = '') =>
