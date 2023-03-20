@@ -19,4 +19,5 @@ Default.args = {
   description:
     'A podcast where musicians take apart their songs, and piece by piece, tell the story of how they were made.',
   title: 'Song Exploder',
+  podcastId: '12345',
 };

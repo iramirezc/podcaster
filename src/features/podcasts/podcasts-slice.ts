@@ -9,7 +9,9 @@ import { setStoredPodcasts } from 'app/storage';
 import { adaptPodcastFromResponse } from './podcasts-utils';
 
 export interface PodcastEpisode {
+  audioUrl: string;
   date: string;
+  description: string;
   duration: string;
   episodeId: string;
   title: string;

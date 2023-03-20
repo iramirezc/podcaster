@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const MainContainer = styled.aside`
   border-radius: 0.3rem;
@@ -47,4 +48,9 @@ export const PodcastAuthor = styled.p`
 
 export const PodcastDescription = styled.p`
   font-style: italic;
+`;
+
+export const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
 `;

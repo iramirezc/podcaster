@@ -1,9 +1,4 @@
 import styled from 'styled-components';
-import {
-  PodcastDetailsCard,
-  PodcastEpisodesTable,
-  PodcastEpisodesTally,
-} from 'features/podcasts';
 
 export const PageContainer = styled.main`
   width: 100%;
@@ -27,11 +22,3 @@ export const RightSection = styled.section`
   justify-self: flex-end;
   margin-left: 5%;
 `;
-
-export const StyledPodcastDetails = styled(PodcastDetailsCard)``;
-
-export const StyledPodcastEpisodesTally = styled(PodcastEpisodesTally)`
-  margin-bottom: 2rem;
-`;
-
-export const StyledPodcastEpisodesTable = styled(PodcastEpisodesTable)``;

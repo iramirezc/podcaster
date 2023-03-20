@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 import {
+  StyledLink,
   Table,
   TableCell,
   TableColumnHeader,
@@ -27,15 +28,21 @@ PodcastEpisodesTable.Row = ({
   date,
   duration,
   episodeId,
+  podcastId,
   title,
 }: {
   date: string;
   duration: string;
   episodeId: string;
+  podcastId: string;
   title: string;
 }) => (
   <TableRow id={`episode-${episodeId}`}>
-    <TableCell noWrap>{title}</TableCell>
+    <TableCell noWrap>
+      <StyledLink to={`/podcast/${podcastId}/episode/${episodeId}`}>
+        {title}
+      </StyledLink>
+    </TableCell>
     <TableCell align="center">{date}</TableCell>
     <TableCell align="center">{duration}</TableCell>
   </TableRow>

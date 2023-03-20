@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '../src/app/providers';
 
 export const parameters = {
@@ -11,4 +12,10 @@ export const parameters = {
   },
 };
 
-export const decorators = [(Story) => <ThemeProvider>{Story()}</ThemeProvider>];
+export const decorators = [
+  (Story) => (
+    <ThemeProvider>
+      <BrowserRouter>{Story()}</BrowserRouter>
+    </ThemeProvider>
+  ),
+];
