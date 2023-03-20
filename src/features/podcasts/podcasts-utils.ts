@@ -15,7 +15,9 @@ export const contains = (target: string, value: string = '') =>
 
 // Borrowed from: https://stackoverflow.com/questions/29816872/how-can-i-convert-milliseconds-to-hhmmss-format-using-javascript
 export const formatDuration = (time: number) =>
-  new Date(time).toISOString().slice(11, 19);
+  typeof time === 'number'
+    ? new Date(Number(time)).toISOString().slice(11, 19)
+    : '00:00:00';
 
 export const formatDate = (isoDate: string) =>
   new Date(isoDate).toISOString().split('T')[0];
@@ -27,10 +29,12 @@ export const adaptPodcastEpisodesFromResponse = (
     return podcastEpisodes
       .filter((result) => result.wrapperType === 'podcastEpisode')
       .map((episode) => ({
+        audioUrl: String(episode.episodeUrl),
+        date: formatDate(episode.releaseDate as string),
+        description: String(episode.description),
+        duration: formatDuration(episode.trackTimeMillis as number),
         episodeId: String(episode.trackId),
         title: String(episode.trackName),
-        duration: formatDuration(episode.trackTimeMillis as number),
-        date: formatDate(episode.releaseDate as string),
       }));
   }
 
