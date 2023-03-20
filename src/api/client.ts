@@ -55,5 +55,21 @@ export const client = (() => {
         data: data.feed.entry,
       };
     },
+    fetchPodcastDetails: async function (podcastId: string) {
+      const response = await get(`${baseUrl}/lookup?id=${podcastId}`);
+
+      let data;
+
+      try {
+        data = JSON.parse(response.data.contents);
+      } catch (err) {
+        return Promise.reject(new Error("Couldn't parse response data."));
+      }
+
+      return {
+        status: response.status,
+        data: data.resultCount > 0 ? data.results[0] : null,
+      };
+    },
   };
 })();

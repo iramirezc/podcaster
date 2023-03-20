@@ -32,6 +32,7 @@ export const DescriptionContainer = styled.div`
 
 export const PodcastCover = styled.img`
   border-radius: 0.3rem;
+  height: 170px;
 `;
 
 export const PodcastTitle = styled.h2`

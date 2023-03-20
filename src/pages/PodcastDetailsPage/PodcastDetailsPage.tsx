@@ -24,6 +24,7 @@ export const PodcastDetailsPage: FC<PodcastDetailsPageProps> = ({
   coverUrl,
   description,
   episodes,
+  podcastId,
   title,
 }) => (
   <PageContainer>
@@ -33,6 +34,7 @@ export const PodcastDetailsPage: FC<PodcastDetailsPageProps> = ({
         coverUrl={coverUrl}
         description={description}
         title={title}
+        podcastId={podcastId}
       />
     </LeftSection>
     <RightSection>

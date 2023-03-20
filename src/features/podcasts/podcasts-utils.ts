@@ -7,3 +7,12 @@ export const adaptPodcastFromResponse = (podcastData: any) => ({
 
 export const contains = (target: string, value: string = '') =>
   target.toLowerCase().includes(value.toLowerCase());
+
+export const adaptPodcastDetailsFromResponse = (podcastDetailsData: any) => ({
+  author: podcastDetailsData.artistName as string,
+  coverUrl: podcastDetailsData.artworkUrl600 as string,
+  description: 'Lorem ipsum',
+  episodes: [],
+  podcastId: podcastDetailsData.collectionId as string,
+  title: podcastDetailsData.collectionName as string,
+});

@@ -15,6 +15,7 @@ interface PodcastDetailsCardProps {
   className?: string;
   coverUrl: string;
   description: string;
+  podcastId: string;
   title: string;
 }
 
@@ -23,10 +24,11 @@ export const PodcastDetailsCard: FC<PodcastDetailsCardProps> = ({
   className,
   coverUrl,
   description,
+  podcastId,
   title,
 }) => {
   return (
-    <MainContainer className={className}>
+    <MainContainer className={className} id={`podcast-${podcastId}`}>
       <CoverContainer>
         <PodcastCover src={coverUrl} />
       </CoverContainer>
