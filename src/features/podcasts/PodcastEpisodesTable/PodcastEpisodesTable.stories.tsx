@@ -19,18 +19,21 @@ Default.args = {
         date="19/03/2023"
         duration="15:45"
         episodeId="1"
+        podcastId="123"
         title="Podcast 1"
       />
       <PodcastEpisodesTable.Row
         date="19/03/2023"
         duration="15:45"
         episodeId="2"
+        podcastId="123"
         title="Podcast 2"
       />
       <PodcastEpisodesTable.Row
         date="19/03/2023"
         duration="15:45"
         episodeId="3"
+        podcastId="123"
         title="Podcast 3"
       />
     </>

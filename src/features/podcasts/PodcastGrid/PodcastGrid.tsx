@@ -1,8 +1,7 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
 
 import { PodcastCard } from '../PodcastCard/PodcastCard';
-import { GridContainer } from './PodcastGrid.styles';
+import { GridContainer, StyledLink } from './PodcastGrid.styles';
 
 interface PodcastProps {
   podcasts: React.ComponentProps<typeof PodcastCard>[];
@@ -11,14 +10,14 @@ interface PodcastProps {
 export const PodcastGrid: FC<PodcastProps> = ({ podcasts }) => (
   <GridContainer>
     {podcasts.map(({ podcastId, coverUrl, title, author }) => (
-      <Link to={`/podcast/${podcastId}`} key={podcastId}>
+      <StyledLink to={`/podcast/${podcastId}`} key={podcastId}>
         <PodcastCard
           podcastId={podcastId}
           coverUrl={coverUrl}
           title={title}
           author={author}
         />
-      </Link>
+      </StyledLink>
     ))}
   </GridContainer>
 );

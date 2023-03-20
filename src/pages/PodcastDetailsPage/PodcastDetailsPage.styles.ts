@@ -1,7 +1,9 @@
-import { PodcastDetailsCard } from 'features/podcasts/PodcastDetailsCard/PodcastDetailsCard';
-import { PodcastEpisodesTable } from 'features/podcasts/PodcastEpisodesTable/PodcastEpisodesTable';
-import { PodcastEpisodesTally } from 'features/podcasts/PodcastEpisodesTally/PodcastEpisodesTally';
 import styled from 'styled-components';
+import {
+  PodcastDetailsCard,
+  PodcastEpisodesTable,
+  PodcastEpisodesTally,
+} from 'features/podcasts';
 
 export const PageContainer = styled.main`
   width: 100%;

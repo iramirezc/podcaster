@@ -1,5 +1,5 @@
-import { PodcastDetailsCard } from 'features/podcasts/PodcastDetailsCard/PodcastDetailsCard';
 import { FC } from 'react';
+import { PodcastDetailsCard } from 'features/podcasts';
 import {
   LeftSection,
   PageContainer,
@@ -46,6 +46,7 @@ export const PodcastDetailsPage: FC<PodcastDetailsPageProps> = ({
             duration={episode.duration}
             episodeId={episode.episodeId}
             key={episode.episodeId}
+            podcastId={podcastId}
             title={episode.title}
           />
         ))}

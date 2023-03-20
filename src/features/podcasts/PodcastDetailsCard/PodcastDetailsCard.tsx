@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import {
   CoverContainer,
   DescriptionContainer,
@@ -8,6 +9,7 @@ import {
   PodcastDescription,
   PodcastTitle,
   TitleContainer,
+  StyledLink,
 } from './PodcastDetailsCard.styles';
 
 interface PodcastDetailsCardProps {
@@ -30,11 +32,15 @@ export const PodcastDetailsCard: FC<PodcastDetailsCardProps> = ({
   return (
     <MainContainer className={className} id={`podcast-${podcastId}`}>
       <CoverContainer>
-        <PodcastCover src={coverUrl} />
+        <StyledLink to={`/podcast/${podcastId}`}>
+          <PodcastCover src={coverUrl} />
+        </StyledLink>
       </CoverContainer>
       <TitleContainer>
-        <PodcastTitle>{title}</PodcastTitle>
-        <PodcastAuthor>by&nbsp;{author}</PodcastAuthor>
+        <StyledLink to={`/podcast/${podcastId}`}>
+          <PodcastTitle>{title}</PodcastTitle>
+          <PodcastAuthor>by&nbsp;{author}</PodcastAuthor>
+        </StyledLink>
       </TitleContainer>
       <DescriptionContainer>
         <p>Description:</p>

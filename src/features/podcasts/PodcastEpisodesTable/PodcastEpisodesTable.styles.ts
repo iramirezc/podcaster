@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Table = styled.div.attrs({ role: 'grid' })`
   border-radius: 0.3rem;
@@ -40,4 +41,9 @@ export const TableCell = styled.div.attrs({ role: 'gridcell' })<{
       text-overflow: ellipsis;
       white-space: nowrap;
     `}
+`;
+
+export const StyledLink = styled(Link)`
+  color: ${({ theme }) => theme.palette.primary};
+  text-decoration: none;
 `;
