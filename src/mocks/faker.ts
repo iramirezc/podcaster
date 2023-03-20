@@ -16,8 +16,11 @@ export const createFakePodcastData = (podcastId = nanoid()) => ({
       label: 'https://via.placeholder.com/170x170',
     },
   ],
-  title: {
-    label: `Podcast title ${podcastId}`,
+  'im:name': {
+    label: `Podcast title${podcastId}`,
+  },
+  summary: {
+    label: `Podcast summary ${podcastId}`,
   },
 });
 
