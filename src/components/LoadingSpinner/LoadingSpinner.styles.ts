@@ -18,15 +18,14 @@ const animation = keyframes`
     }
 `;
 
-export const Circle = styled.div`
+export const Circle = styled.div<{ size?: string }>`
   display: inline-block;
   transform: translateZ(1px);
 
   & > div {
     display: inline-block;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
+    width: ${({ size = '1rem' }) => size};
+    height: ${({ size = '1rem' }) => size};
     border-radius: 50%;
     background: ${({ theme }) => theme.palette.primary};
     animation: ${animation} 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
