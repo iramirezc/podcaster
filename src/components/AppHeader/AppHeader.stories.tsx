@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { AppName } from 'components';
 import { AppHeader } from './AppHeader';
 
 export default {
@@ -16,4 +17,6 @@ const AppHeaderTemplate: ComponentStory<typeof AppHeader> = (props) => (
 
 export const Default = AppHeaderTemplate.bind({});
 
-Default.args = {};
+Default.args = {
+  children: <AppName />,
+};

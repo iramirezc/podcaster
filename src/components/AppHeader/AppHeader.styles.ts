@@ -4,10 +4,8 @@ export const StyledAppHeader = styled.header`
   align-items: center;
   background-color: ${({ theme }) => theme.palette.background};
   border-bottom: 1px solid gray;
-  color: ${({ theme }) => theme.palette.primary};
   display: flex;
-  font-size: 1.5rem;
-  font-weight: 600;
+  justify-content: space-between;
   padding: 0.9rem;
   position: sticky;
   top: 0;
