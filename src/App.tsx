@@ -1,11 +1,19 @@
 import { RouterProvider } from 'react-router-dom';
 import { router } from 'app/router';
-import { AppHeader } from 'components';
+import { useAppSelector } from 'app/hooks';
+import { AppHeader, AppName } from 'components';
+import { selectStatus } from 'features/podcasts';
+import { StyledSpinner } from './App.styles';
 
 function App() {
+  const podcastsStatus = useAppSelector(selectStatus);
+
   return (
     <>
-      <AppHeader />
+      <AppHeader>
+        <AppName />
+        {podcastsStatus === 'loading' && <StyledSpinner />}
+      </AppHeader>
       <RouterProvider router={router} />
     </>
   );
