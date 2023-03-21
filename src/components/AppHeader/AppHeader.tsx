@@ -1,8 +1,6 @@
-import { FC } from 'react';
+import { PropsWithChildren } from 'react';
 import { StyledAppHeader } from './AppHeader.styles';
 
-interface AppHeaderProps {}
-
-export const AppHeader: FC<AppHeaderProps> = () => {
-  return <StyledAppHeader>Podcaster</StyledAppHeader>;
+export const AppHeader = ({ children }: PropsWithChildren) => {
+  return <StyledAppHeader>{children}</StyledAppHeader>;
 };

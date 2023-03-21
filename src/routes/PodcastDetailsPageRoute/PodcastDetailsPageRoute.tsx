@@ -1,34 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { client } from 'api/client';
 import {
   adaptPodcastEpisodesFromResponse,
   selectPodcastById,
   savePodcastEpisodes,
+  updateStatus,
+  selectStatus,
 } from 'features/podcasts';
 import { PodcastDetailsPage } from 'pages';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-
-type RequestStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export const PodcastDetailsPageRoute = () => {
   const { podcastId } = useParams<{ podcastId: string }>();
   const podcast = useAppSelector((state) =>
     selectPodcastById(state, String(podcastId))
   );
-  const [status, setStatus] = useState<RequestStatus>('idle');
+  const status = useAppSelector(selectStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     (async () => {
-      if (podcast && podcast.episodes.length === 0 && status === 'idle') {
-        setStatus('loading');
+      if (podcast && podcast.episodes.length === 0 && status !== 'loading') {
+        dispatch(updateStatus({ status: 'loading' }));
 
         try {
           const response = await client.fetchPodcastDetails(podcast.podcastId);
 
-          setStatus('success');
+          dispatch(updateStatus({ status: 'success' }));
 
           const episodes = adaptPodcastEpisodesFromResponse(response.data);
 
@@ -37,7 +37,7 @@ export const PodcastDetailsPageRoute = () => {
           );
         } catch (err) {
           console.error(err);
-          setStatus('error');
+          dispatch(updateStatus({ status: 'error' }));
         }
       }
     })();

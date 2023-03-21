@@ -26,6 +26,8 @@ export interface Podcast {
   episodes: PodcastEpisode[];
 }
 
+type PodcastStatus = 'idle' | 'loading' | 'success' | 'error';
+
 export const podcastsAdapter = createEntityAdapter<Podcast>({
   selectId: (podcast) => podcast.podcastId,
 });
@@ -46,7 +48,7 @@ export const podcastsSlice = createSlice({
   initialState: podcastsAdapter.getInitialState<{
     filter: '';
     lastFetch: number | null;
-    status: 'idle' | 'loading' | 'success' | 'error';
+    status: PodcastStatus;
   }>({
     filter: '',
     lastFetch: null,
@@ -70,6 +72,9 @@ export const podcastsSlice = createSlice({
 
       setStoredPodcasts(state);
     },
+    updateStatus(state, action: PayloadAction<{ status: PodcastStatus }>) {
+      state.status = action.payload.status;
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchPodcasts.pending, (state) => {
@@ -89,6 +94,6 @@ export const podcastsSlice = createSlice({
 
 const { reducer, actions } = podcastsSlice;
 
-export const { updateFilter, savePodcastEpisodes } = actions;
+export const { updateFilter, savePodcastEpisodes, updateStatus } = actions;
 
 export default reducer;
